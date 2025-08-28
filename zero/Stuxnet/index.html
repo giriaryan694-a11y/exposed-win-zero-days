@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stuxnet Zero-Days – Windows Zero-Day Exploits</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #0f0f0f;
+            color: #00ff00;
+            margin: 0;
+            padding: 0;
+            background-image:
+                radial-gradient(circle at 1px 1px, #1a1a1a 1px, transparent 0),
+                linear-gradient(to bottom, transparent 99%, #00ff00 1%);
+            background-size: 20px 20px, 100% 20px;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 0 0 10px #00ff00;
+            margin: 0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #00cc00;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin: 15px 0 10px 0;
+            color: #00aa00;
+        }
+        p, li {
+            margin: 8px 0;
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 20px;
+            color: #00cc00;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .matrix canvas {
+            display: block;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        .info-box {
+            background-color: #1a1a1a;
+            border-left: 3px solid #00ff00;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .references {
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+        .references a {
+            color: #00aa00;
+            text-decoration: none;
+        }
+        .references a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix"><canvas id="matrix"></canvas></div>
+    <div class="container">
+        <a href="../../" class="back-link">← Back to exposed-win-zero-days</a>
+        <header>
+            <h1>Stuxnet Zero-Days</h1>
+            <h2>Windows Zero-Day Exploits Used in Stuxnet</h2>
+        </header>
+
+        <div class="info-box">
+            <h3>Overview</h3>
+            <p><strong>Stuxnet</strong> is one of the most sophisticated cyber weapons ever discovered, famously targeting Iran's nuclear facilities in 2010. It exploited <strong>four previously unknown (zero-day) vulnerabilities in Microsoft Windows</strong> to gain control of industrial systems and cause physical damage to centrifuges.</p>
+            <p>Stuxnet was designed to spread via USB drives and local networks, and its zero-days allowed it to evade detection and execute malicious commands on PLCs (Programmable Logic Controllers).</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Zero-Day Vulnerabilities Used by Stuxnet</h3>
+            <ul>
+                <li><strong>CVE-2010-2729</strong>: Windows Shell LNK/PIF file vulnerability (used for USB propagation)</li>
+                <li><strong>CVE-2010-2743</strong>: Windows Print Spooler vulnerability (used for privilege escalation)</li>
+                <li><strong>CVE-2010-2568</strong>: Windows Server Service vulnerability (used for remote code execution)</li>
+                <li><strong>CVE-2010-2772</strong>: Windows Task Scheduler vulnerability (used for privilege escalation)</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>Technical Details</h3>
+            <ul>
+                <li><strong>Vulnerability Types:</strong> Remote Code Execution, Privilege Escalation</li>
+                <li><strong>Affected Components:</strong> Windows Shell, Print Spooler, Server Service, Task Scheduler</li>
+                <li><strong>Attack Vector:</strong> USB, Network</li>
+                <li><strong>Impact:</strong> Allowed Stuxnet to spread, escalate privileges, and execute malicious code on industrial control systems</li>
+                <li><strong>Exploitation:</strong> Used in targeted attacks on Iran's nuclear facilities</li>
+                <li><strong>Patch Date:</strong> 2010 (after Stuxnet was discovered)</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>Exploitation</h3>
+            <p>Stuxnet's zero-days were used in a multi-stage attack:</p>
+            <ol>
+                <li>Infect systems via USB drives using the LNK/PIF vulnerability.</li>
+                <li>Escalate privileges using the Print Spooler and Task Scheduler vulnerabilities.</li>
+                <li>Spread across the network using the Server Service vulnerability.</li>
+                <li>Deploy malicious code to PLCs, causing physical damage to centrifuges.</li>
+            </ol>
+            <p>Stuxnet's use of zero-days made it extremely difficult to detect and mitigate, and it set a precedent for state-sponsored cyber warfare.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Affected Systems</h3>
+            <ul>
+                <li>Windows XP</li>
+                <li>Windows Vista</li>
+                <li>Windows 7</li>
+                <li>Windows Server 2003</li>
+                <li>Windows Server 2008</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>Patch Information</h3>
+            <p>Microsoft released patches for all four zero-day vulnerabilities in <strong>2010</strong> after Stuxnet was discovered. Users and administrators were urged to apply the updates immediately to prevent further exploitation.</p>
+            <p>For systems that could not be patched, Microsoft recommended disabling vulnerable services and monitoring for suspicious activity.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Mitigation</h3>
+            <ul>
+                <li>Apply all relevant security updates from Microsoft.</li>
+                <li>Disable AutoRun for USB drives.</li>
+                <li>Restrict access to industrial control systems.</li>
+                <li>Monitor for unusual network and system activity.</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>References</h3>
+            <div class="references">
+                <p><a href="https://en.wikipedia.org/wiki/Stuxnet" target="_blank">Wikipedia: Stuxnet</a></p>
+                <p><a href="https://www.ibm.com/think/topics/zero-day" target="_blank">IBM: What is a Zero-Day Exploit? (Stuxnet section)</a></p>
+                <p><a href="https://www.symantec.com/blogs/expert-perspectives/stuxnet-anniversary" target="_blank">Symantec: Stuxnet Anniversary</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix rain effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = '0101010101010101010101010101010101010101010101010101010101010101';
+        const fontSize = 12;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff00';
+            ctx.font = `${fontSize}px monospace`;
+
+            drops.forEach((y, i) => {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            });
+        }
+
+        setInterval(draw, 50);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>

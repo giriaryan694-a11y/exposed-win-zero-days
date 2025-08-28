@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exposed-win-zero-days</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #0f0f0f;
+            color: #00ff00;
+            margin: 0;
+            padding: 0;
+            background-image:
+                radial-gradient(circle at 1px 1px, #1a1a1a 1px, transparent 0),
+                linear-gradient(to bottom, transparent 99%, #00ff00 1%);
+            background-size: 20px 20px, 100% 20px;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 0 0 10px #00ff00;
+            margin: 0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        h2 {
+            font-size: 1.2em;
+            margin: 5px 0;
+            color: #00cc00;
+        }
+        .author {
+            font-size: 0.9em;
+            color: #00aa00;
+            margin-bottom: 20px;
+        }
+        .vuln-list {
+            list-style: none;
+            padding: 0;
+        }
+        .vuln-list li {
+            background-color: #1a1a1a;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 3px solid #00ff00;
+            transition: all 0.3s;
+        }
+        .vuln-list li:hover {
+            background-color: #2a2a2a;
+            transform: scale(1.02);
+        }
+        .vuln-list a {
+            color: #00ff00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .vuln-list a:hover {
+            color: #00cc00;
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #00aa00;
+            font-size: 0.8em;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #00ff00; }
+            to { text-shadow: 0 0 15px #00ff00, 0 0 20px #00ff00; }
+        }
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .matrix canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix"><canvas id="matrix"></canvas></div>
+    <div class="container">
+        <header>
+            <h1>exposed-win-zero-days</h1>
+            <h2>Curated list of publicly exposed Windows zero-day vulnerabilities</h2>
+            <p class="author">Made by Aryan Giri</p>
+        </header>
+        <ul class="vuln-list">
+    <li><a href="/zero/CVE-2025-29824">CVE-2025-29824 (CLFS Zero-Day)</a> – Elevation of Privilege, Patched April 2025</li>
+    <li><a href="/zero/CVE-2025-30400">CVE-2025-30400 (DWM Core Library)</a> – Elevation of Privilege, Patched May 2025</li>
+    <li><a href="/zero/CVE-2025-30397">CVE-2025-30397 (Microsoft Scripting Engine)</a> – Remote Code Execution, Patched May 2025</li>
+    <li><a href="/zero/CVE-2025-53779">CVE-2025-53779 (Windows Kerberos)</a> – Privilege Escalation, Patched August 2025</li>
+    <li><a href="/zero/CVE-2024-49039">CVE-2024-49039 (Windows Sandbox Escape)</a> – Exploited in Malware Campaigns, 2024</li>
+    <li><a href="/zero/CVE-2024-9680">CVE-2024-9680 (Browser + Windows Exploit Chain)</a> – Sandbox Escape, 2024</li>
+    <li><a href="/zero/CVE-2023-36033">CVE-2023-36033 (DWM Core Library)</a> – Elevation of Privilege, 2023</li>
+    <li><a href="/zero/CVE-2024-30051">CVE-2024-30051 (DWM Core Library)</a> – Elevation of Privilege, 2024</li>
+    <li><a href="/zero/CVE-2025-33053">CVE-2025-33053 (WebDAV)</a> – Remote Code Execution, Patched June 2025</li>
+    <li><a href="/zero/CVE-2017-0144">EternalBlue (CVE-2017-0144)</a> – SMB Exploit, 2017</li>
+    <li><a href="/zero/CVE-2024-21338">CVE-2024-21338 (Windows AppLocker Driver)</a> – Kernel Access, Exploited 2024</li>
+    <li><a href="/zero/CVE-2024-49138">CVE-2024-49138 (CLFS Zero-Day)</a> – Ransomware, Patched Dec 2024</li>
+    <li><a href="/zero/CVE-2024-24993">CVE-2024-24993 (Windows NTFS)</a> – Buffer Overflow, Exploited 2025</li>
+    <li><a href="/zero/Stuxnet">Stuxnet Zero-Days</a> – Industrial Espionage, 2010</li>
+</ul>
+        <footer>
+            <p>© 2025 exposed-win-zero-days | For educational and research purposes only.</p>
+        </footer>
+    </div>
+    <script>
+        // Matrix rain effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = '0101010101010101010101010101010101010101010101010101010101010101';
+        const fontSize = 12;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff00';
+            ctx.font = `${fontSize}px monospace`;
+
+            drops.forEach((y, i) => {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            });
+        }
+
+        setInterval(draw, 50);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
